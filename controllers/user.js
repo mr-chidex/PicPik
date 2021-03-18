@@ -1,3 +1,4 @@
+const bcryptjs = require("bcryptjs")
 const User = require("../models/user");
 
 //@Route  POST /api/users/signup
@@ -22,6 +23,20 @@ const signup = async (req, res, next) => {
 //@access    	Public
 //@desc      signin users
 const signin = (req, res, next) => {
+  const { email, password } = req.body;
+
+  const user = User.findOne({ email });
+
+  if (!user)
+    return res.status(400).json({ message: "email or password is incorrect" });
+
+  const isMatch = await bcryptjs.compare(password, user.password)
+
+  if (!isMatch) return res.status(400).json({ message: "email or password is incorrect" })
+
+  if (!user)
+    return res.status(400).json({ message: "email or password is invalid" });
+    
   res.json({ message: "sign in" });
 };
 
