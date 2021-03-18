@@ -9,6 +9,8 @@ const userRoutes = require("./routes/user");
 const imageRoutes = require("./routes/image");
 
 app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoutes);
 app.use("/api/image", imageRoutes);

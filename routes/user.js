@@ -1,7 +1,8 @@
-const express = require("express");
-const router = express.Router();
+const expressPromise = require("express-promise-router");
+const router = expressPromise();
 
 const { signup, signin } = require("../controllers/user");
+const uploadImage = require("../middleware/multer");
 
 router.route("/signup").post(signup);
 router.route("/signin").post(signin);

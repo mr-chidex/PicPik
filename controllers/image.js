@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const cloudinary = require("../handlers/cloudinary");
 const Image = require("../models/image");
 const foldername = "chi_splash";
+
 //@Route  POST /api/image/
 //@access    	Private
 //@desc      add new image
