@@ -1,8 +1,32 @@
+const cloudinary = require("../handlers/cloudinary");
+const Image = require("../models/image");
+
 //@Route  POST /api/image/
 //@access    	Private
 //@desc      add new image
-const addImage = (req, res, next) => {
-  res.json({ message: "addImage" });
+const addImage = async (req, res, next) => {
+  console.log(req.file);
+  if (!req.file) return res.status(400).json({ message: "no image selected" });
+
+  const imageCloud = await cloudinary.v2.uploader.upload(req.file.path, {
+    folder: "chi_splash",
+  });
+
+  console.log(imageCloud);
+
+  if (!imageCloud)
+    return res.status(400).json({ message: "error saving image" });
+
+  //used split to get public_id because a folder was specified for the image
+  const image = await new Image({
+    name: req.file.originalname,
+    url: imageCloud.secure_url,
+    image_id: imageCloud.public_id.split("/")[1],
+  });
+
+  await image.save();
+
+  res.json({ message: "image successfully added", image });
 };
 
 //@Route  GET /api/image/

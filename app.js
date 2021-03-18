@@ -14,7 +14,7 @@ app.use("/api/image", imageRoutes);
 
 //handle errors
 app.use((error, req, res, next) => {
-  console.log(error.messgae);
+  console.log("messa", error);
   res.status(500).json({ message: error.message });
 });
 
@@ -22,6 +22,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(process.env.SPLASH_DB, {
     useUnifiedTopology: true,
+    useNewUrlParser: true,
   })
   .then(() => {
     console.log("db connected");

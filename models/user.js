@@ -16,11 +16,9 @@ const userSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     image_id: {
       type: String,
-      required: true,
     },
     password: {
       type: String,

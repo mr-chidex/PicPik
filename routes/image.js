@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const expressPromise = require("express-promise-router");
+const router = expressPromise();
 
 const {
   deleteImage,
@@ -9,7 +9,9 @@ const {
   addImage,
 } = require("../controllers/image");
 
-router.route("/").get(getImages).post(addImage);
-router.route("/:imageId").put(updateImage).delete(deleteImage);
+const imageUpload = require("../middleware/multer");
+
+router.route("/").get(getImages).post(imageUpload.single("image"), addImage);
+router.route("/:imageId").put(updateImage).delete(deleteImage).get(getImage);
 
 module.exports = router;

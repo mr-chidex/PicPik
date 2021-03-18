@@ -27,6 +27,7 @@
     "cloudinary": "^1.25.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
     "express-validator": "^6.10.0",
     "mongoose": "^5.11.18",
     "morgan": "^1.10.0",
