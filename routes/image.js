@@ -12,6 +12,10 @@ const {
 const imageUpload = require("../middleware/multer");
 
 router.route("/").get(getImages).post(imageUpload.single("image"), addImage);
-router.route("/:imageId").put(updateImage).delete(deleteImage).get(getImage);
+router
+  .route("/:imageId")
+  .put(imageUpload.single("image"), updateImage)
+  .delete(imageUpload.single("image"), deleteImage)
+  .get(getImage);
 
 module.exports = router;
