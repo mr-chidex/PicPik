@@ -65,27 +65,24 @@ const updateImage = async (req, res, next) => {
 
   const image = await Image.findOne({ image_id: imageId });
 
+  //check if image exist in db
   if (!image) return res.status(404).json({ message: "image does not exist" });
 
   if (!req.file)
     return res.status(400).json({ message: "no image selected for update" });
 
-  const { result } = await cloudinary.v2.uploader.destroy(
-    `${foldername}/${imageId}`
-  );
+  //delete old image from cloud
+  await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
 
-  console.log(result);
-
-  if (result !== "ok")
-    return res.status(404).json({ messgae: "image not found" });
-
+  //save new image to cloud
   const newImage = await cloudinary.v2.uploader.upload(req.file.path, {
     folder: foldername,
   });
 
+  //update image
   image.url = newImage.secure_url;
   image.name = req.file.originalname;
-  image_id = newImage.public_id.split("/")[1];
+  image.image_id = newImage.public_id.split("/")[1];
 
   await image.save();
 
@@ -95,8 +92,22 @@ const updateImage = async (req, res, next) => {
 //@Route  PUT /api/image/:imageId(image_id)
 //@access    	Private
 //@desc      edit image
-const deleteImage = (req, res, next) => {
-  res.json({ message: "deleteImage" });
+const deleteImage = async (req, res, next) => {
+  const imageId = req.params.imageId;
+
+  if (!imageId) return res.status(400).json({ message: "invalid image id" });
+
+  const image = await Image.findOne({ image_id: imageId });
+
+  if (!image) return res.status(404).json({ message: "image does not exist" });
+
+  //delete image from cloudinary
+  await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
+
+  //delete from db
+  await Image.deleteOne({ image_id: imageId });
+
+  res.json({ message: "image successfully deleted" });
 };
 
 module.exports = { deleteImage, updateImage, getImage, getImages, addImage };
