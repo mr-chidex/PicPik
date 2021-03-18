@@ -4,7 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const app = express();
 
-const User = require("./models/user");
+const { User } = require("./models/user");
 const userRoutes = require("./routes/user");
 const imageRoutes = require("./routes/image");
 
