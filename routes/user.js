@@ -5,7 +5,7 @@ const { signup, signin } = require("../controllers/user");
 const uploadImage = require("../middleware/multer");
 const { signInVal, signUpVal } = require("../middleware/validation");
 
-router.route("/signup").post(signInVal, signup);
-router.route("/signin").post(signUpVal, signin);
+router.route("/signup").post(signUpVal, signup);
+router.route("/signin").post(signInVal, signin);
 
 module.exports = router;

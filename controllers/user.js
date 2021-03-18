@@ -1,14 +1,21 @@
 const bcryptjs = require("bcryptjs");
 const { User, getToken } = require("../models/user");
+const { validationResult } = require("express-validator");
 
 //@Route  POST /api/users/signup
 //@access    	Public
 //@desc      signup new users
 const signup = async (req, res, next) => {
+  const error = validationResult(req);
+
+  if (!error.isEmpty())
+    return res.status(400).json({ messgae: error.array()[0].msg });
+
   const { name, email, password } = req.body;
 
-  const oldUser = User.findOne({ email });
+  const oldUser = await User.findOne({ email });
 
+  console.log(oldUser);
   //check if email already in use
   if (oldUser) return res.status(400).json({ message: "email already in use" });
 
@@ -23,6 +30,11 @@ const signup = async (req, res, next) => {
 //@access    	Public
 //@desc      signin users
 const signin = async (req, res, next) => {
+  const error = validationResult(req);
+
+  if (!error.isEmpty())
+    return res.status(400).json({ messgae: error.array()[0].msg });
+
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
