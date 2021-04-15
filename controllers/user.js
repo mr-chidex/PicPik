@@ -15,7 +15,6 @@ const signup = async (req, res, next) => {
 
   const oldUser = await User.findOne({ email });
 
-  console.log(oldUser);
   //check if email already in use
   if (oldUser) return res.status(400).json({ message: "email already in use" });
 

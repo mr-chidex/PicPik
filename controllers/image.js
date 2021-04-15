@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const cloudinary = require("../handlers/cloudinary");
+const cloudinary = require("../utils/cloudinary");
 const Image = require("../models/image");
 const foldername = "chi_splash";
 
