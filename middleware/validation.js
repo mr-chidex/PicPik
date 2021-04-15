@@ -19,7 +19,11 @@ exports.signUpVal = [
     .trim()
     .isLength({ min: 5 })
     .withMessage("password should be at least 5 chars long"),
-  body("name")
+  body("firstname")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("name should be at least 3 chars long"),
+  body("lastname")
     .trim()
     .isLength({ min: 3 })
     .withMessage("name should be at least 3 chars long"),

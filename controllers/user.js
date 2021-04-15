@@ -11,14 +11,15 @@ const signup = async (req, res, next) => {
   if (!error.isEmpty())
     return res.status(400).json({ messgae: error.array()[0].msg });
 
-  const { name, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
+  console.log(req.body);
 
   const oldUser = await User.findOne({ email });
 
   //check if email already in use
   if (oldUser) return res.status(400).json({ message: "email already in use" });
 
-  const user = await new User({ name, email, password });
+  const user = await new User({ firstname, lastname, email, password });
 
   await user.save();
 
@@ -51,7 +52,8 @@ const signin = async (req, res, next) => {
   res.json({
     isAdmin: user.isAdmin,
     _id: user._id,
-    name: user.name,
+    firstname: user.firstname,
+    lastname: user.lastname,
     email: user.email,
     image: user.image,
     image_id: user.image_id,

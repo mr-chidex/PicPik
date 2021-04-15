@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 require("dotenv").config();
+const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -8,6 +9,7 @@ const { User } = require("./models/user");
 const userRoutes = require("./routes/user");
 const imageRoutes = require("./routes/image");
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +41,8 @@ mongoose
     const user = await User.find();
     if (!user.length > 0) {
       const admin = await new User({
-        name: process.env.ADMIN_NAME,
+        firstname: process.env.ADMIN_NAME,
+        lastname: process.env.ADMIN_NAME,
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASS,
         isAdmin: true,
