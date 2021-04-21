@@ -33,7 +33,7 @@ exports.UpdateProfileVal = [
   body("firstname")
     .trim()
     .isLength({ min: 3 })
-    .withMessage("firstnam name should be at least 3 chars long"),
+    .withMessage("firstname name should be at least 3 chars long"),
   body("lastname")
     .trim()
     .isLength({ min: 3 })

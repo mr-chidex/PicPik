@@ -46,9 +46,7 @@ const addImage = async (req, res, next) => {
 //@access    	Public
 //@desc      get all images
 const getImages = async (req, res, next) => {
-  const images = await Image.find()
-    .populate("author ", "email firstname lastname _id")
-    .select("-__v");
+  const images = await Image.find().select("-__v");
 
   if (!images) return res.staus(404).json({ message: "error getting images" });
 
@@ -65,7 +63,7 @@ const getImage = async (req, res, next) => {
     return res.status(400).json({ message: "Invalid image id" });
 
   const image = await Image.findById(imageId)
-    .populate("author", "firstname lastname email _id")
+    .populate("author", "firstname lastname email _id image")
     .select("-__v ");
 
   if (!image) return res.status(404).json({ message: "image does not exist" });
