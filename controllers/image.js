@@ -29,7 +29,13 @@ const addImage = async (req, res, next) => {
 
   //Add image to user's model
   const user = await User.findById(req.user._id);
-  user.images = [...user.images, image._id];
+  user.images = [
+    ...user.images,
+    {
+      url: imageCloud.secure_url,
+      image_id: imageCloud.public_id.split("/")[1],
+    },
+  ];
 
   await user.save();
 
