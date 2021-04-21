@@ -58,7 +58,9 @@ const getImage = async (req, res, next) => {
   if (!mongoose.isValidObjectId(imageId))
     return res.status(400).json({ message: "Invalid image id" });
 
-  const image = await Image.findById(imageId).select("-__v ");
+  const image = await Image.findById(imageId)
+    .populate("author", "firstname lastname email _id")
+    .select("-__v ");
 
   if (!image) return res.status(404).json({ message: "image does not exist" });
 
@@ -77,6 +79,7 @@ const deleteImage = async (req, res, next) => {
 
   if (!image) return res.status(404).json({ message: "image does not exist" });
 
+  // const user = await User.findOne()
   //delete image from cloudinary
   await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
 

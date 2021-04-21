@@ -28,3 +28,14 @@ exports.signUpVal = [
     .isLength({ min: 3 })
     .withMessage("name should be at least 3 chars long"),
 ];
+
+exports.UpdateProfileVal = [
+  body("firstname")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("firstnam name should be at least 3 chars long"),
+  body("lastname")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("lastname should be at least 3 chars long"),
+];
