@@ -9,7 +9,7 @@ const signup = async (req, res, next) => {
   const error = validationResult(req);
 
   if (!error.isEmpty())
-    return res.status(400).json({ messgae: error.array()[0].msg });
+    return res.status(400).json({ message: error.array()[0].msg });
 
   const { firstname, lastname, email, password } = req.body;
   console.log(req.body);
@@ -33,7 +33,7 @@ const signin = async (req, res, next) => {
   const error = validationResult(req);
 
   if (!error.isEmpty())
-    return res.status(400).json({ messgae: error.array()[0].msg });
+    return res.status(400).json({ message: error.array()[0].msg });
 
   const { email, password } = req.body;
 

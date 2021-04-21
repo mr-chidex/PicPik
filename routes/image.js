@@ -3,19 +3,21 @@ const router = expressPromise();
 
 const {
   deleteImage,
-  updateImage,
   getImage,
   getImages,
   addImage,
 } = require("../controllers/image");
-
+const authUser = require("../middleware/auth");
 const imageUpload = require("../middleware/multer");
 
-router.route("/").get(getImages).post(imageUpload.single("image"), addImage);
+router
+  .route("/")
+  .get(getImages)
+  .post(authUser, imageUpload.single("image"), addImage);
+
 router
   .route("/:imageId")
-  .put(imageUpload.single("image"), updateImage)
-  .delete(imageUpload.single("image"), deleteImage)
+  .delete(authUser, imageUpload.single("image"), deleteImage)
   .get(getImage);
 
 module.exports = router;

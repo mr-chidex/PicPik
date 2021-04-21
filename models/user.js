@@ -29,6 +29,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+      },
+    ],
     isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }

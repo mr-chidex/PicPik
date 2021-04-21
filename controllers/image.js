@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const cloudinary = require("../utils/cloudinary");
 const Image = require("../models/image");
+const { User } = require("../models/user");
 const foldername = "chi_splash";
 
 //@Route  POST /api/image/
@@ -21,10 +22,16 @@ const addImage = async (req, res, next) => {
     name: req.file.originalname,
     url: imageCloud.secure_url,
     image_id: imageCloud.public_id.split("/")[1],
-    author: "60534800d9c95139b4593800",
+    author: req.user._id,
   });
 
   await image.save();
+
+  //Add image to user's model
+  const user = await User.findById(req.user._id);
+  user.images = [...user.images, image._id];
+
+  await user.save();
 
   res.status(201).json({ message: "image successfully added", image });
 };
@@ -33,7 +40,9 @@ const addImage = async (req, res, next) => {
 //@access    	Public
 //@desc      get all images
 const getImages = async (req, res, next) => {
-  const images = await Image.find();
+  const images = await Image.find()
+    .populate("author ", "email firstname lastname _id")
+    .select("-__v");
 
   if (!images) return res.staus(404).json({ message: "error getting images" });
 
@@ -58,41 +67,7 @@ const getImage = async (req, res, next) => {
 
 //@Route  PUT /api/image/:imageId(image_id)
 //@access    	Private
-//@desc      edit image
-const updateImage = async (req, res, next) => {
-  const imageId = req.params.imageId;
-
-  if (!imageId) return res.status(400).json({ message: "invalid image id" });
-
-  const image = await Image.findOne({ image_id: imageId });
-
-  //check if image exist in db
-  if (!image) return res.status(404).json({ message: "image does not exist" });
-
-  if (!req.file)
-    return res.status(400).json({ message: "no image selected for update" });
-
-  //delete old image from cloud
-  await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
-
-  //save new image to cloud
-  const newImage = await cloudinary.v2.uploader.upload(req.file.path, {
-    folder: foldername,
-  });
-
-  //update image
-  image.url = newImage.secure_url;
-  image.name = req.file.originalname;
-  image.image_id = newImage.public_id.split("/")[1];
-
-  await image.save();
-
-  res.json(image);
-};
-
-//@Route  PUT /api/image/:imageId(image_id)
-//@access    	Private
-//@desc      edit image
+//@desc      delete image
 const deleteImage = async (req, res, next) => {
   const imageId = req.params.imageId;
 
@@ -111,4 +86,4 @@ const deleteImage = async (req, res, next) => {
   res.json({ message: "image successfully deleted" });
 };
 
-module.exports = { deleteImage, updateImage, getImage, getImages, addImage };
+module.exports = { deleteImage, getImage, getImages, addImage };
