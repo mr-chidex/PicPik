@@ -60,6 +60,7 @@ const signin = async (req, res, next) => {
     email: user.email,
     image: user.image,
     image_id: user.image_id,
+    images: user.images,
     token,
   });
 };
@@ -104,7 +105,7 @@ const updateProfile = async (req, res, next) => {
 
   await user.save();
 
-  res.status(201).json({
+  res.status(200).json({
     message: "profile updated successfully",
     user: {
       images: user.images,
@@ -118,4 +119,28 @@ const updateProfile = async (req, res, next) => {
   });
 };
 
-module.exports = { signup, signin, updateProfile };
+const passwordReset = async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  if (!user) return res.status(400).json({ message: "User does not exist" });
+
+  const error = validationResult(req);
+
+  if (!error.isEmpty())
+    return res.status(422).json({ message: error.array()[0].msg });
+
+  const { currentPassword, newPassword } = req.body;
+
+  const isMatch = await bcryptjs.compare(currentPassword, user.password);
+
+  if (!isMatch)
+    return res.status(400).json({ message: "current password is incorrect" });
+
+  user.password = newPassword;
+
+  user.save();
+
+  return res.status(200).json({ message: "password update successfully" });
+};
+
+module.exports = { signup, signin, updateProfile, passwordReset };

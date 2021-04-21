@@ -31,8 +31,10 @@ const userSchema = new Schema(
     },
     images: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Image",
+        url: {
+          type: String,
+        },
+        image_id: { type: String },
       },
     ],
     isAdmin: { type: Boolean, default: false },

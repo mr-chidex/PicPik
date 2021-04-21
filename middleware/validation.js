@@ -39,3 +39,14 @@ exports.UpdateProfileVal = [
     .isLength({ min: 3 })
     .withMessage("lastname should be at least 3 chars long"),
 ];
+
+exports.passwordResetVal = [
+  body("currentPassword")
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage("current password should be at least 5 chars long"),
+  body("newPassword")
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage("new password should be at least 5 chars long"),
+];
