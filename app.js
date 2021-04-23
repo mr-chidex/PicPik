@@ -17,6 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRoutes);
 app.use("/api/image", imageRoutes);
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "API by mr-chidex ",
+    github: "https://www.github.com/mr-chidex",
+  });
+});
+
 //handle errors
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
