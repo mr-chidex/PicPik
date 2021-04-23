@@ -19,16 +19,13 @@ app.use("/api/image", imageRoutes);
 
 //handle errors
 app.use((error, req, res, next) => {
-  console.log("message", error);
   const statusCode = error.statusCode || 500;
-  res
-    .status(statusCode)
-    .json({ message: error.message || "error connecting to server" });
+  res.status(statusCode).json({ message: error.message || "Network Error" });
 });
 
 //connect to db and start server
 mongoose
-  .connect(process.env.SPLASH_DB, {
+  .connect(process.env.DEX_PHOTOS, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
@@ -48,6 +45,7 @@ mongoose
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASS,
         isAdmin: true,
+        images: [],
       });
 
       await admin.save();

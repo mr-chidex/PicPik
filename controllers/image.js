@@ -99,7 +99,8 @@ const deleteImage = async (req, res, next) => {
 
   //remove image from user's image db
   const user = req.user;
-  user.images = user.images.filter((image) => image.image_id !== image_id);
+  user.images = user.images.filter((image) => image.image_id !== imageId);
+
   user.save();
 
   res.json({ message: "image successfully deleted" });
