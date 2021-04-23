@@ -34,6 +34,7 @@ const addImage = async (req, res, next) => {
     {
       url: imageCloud.secure_url,
       image_id: imageCloud.public_id.split("/")[1],
+      _id: image._id,
     },
   ];
 
@@ -79,16 +80,27 @@ const deleteImage = async (req, res, next) => {
 
   if (!imageId) return res.status(400).json({ message: "invalid image id" });
 
-  const image = await Image.findOne({ image_id: imageId });
+  //check if image exist and if user macthes the image author
+  const image = await Image.findOne({
+    image_id: imageId,
+    author: req.user._id,
+  });
 
-  if (!image) return res.status(404).json({ message: "image does not exist" });
+  if (!image)
+    return res
+      .status(401)
+      .json({ message: "Unauthorize access deleting this image" });
 
-  // const user = await User.findOne()
   //delete image from cloudinary
   await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
 
-  //delete from db
+  //delete from Image db
   await Image.deleteOne({ image_id: imageId });
+
+  //remove image from user's image db
+  const user = req.user;
+  user.images = user.images.filter((image) => image.image_id !== image_id);
+  user.save();
 
   res.json({ message: "image successfully deleted" });
 };

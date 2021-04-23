@@ -21,7 +21,9 @@ app.use("/api/image", imageRoutes);
 app.use((error, req, res, next) => {
   console.log("message", error);
   const statusCode = error.statusCode || 500;
-  res.status(statusCode).json({ message: error.message });
+  res
+    .status(statusCode)
+    .json({ message: error.message || "error connecting to server" });
 });
 
 //connect to db and start server
