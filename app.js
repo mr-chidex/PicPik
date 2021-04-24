@@ -47,8 +47,8 @@ mongoose
     const user = await User.find();
     if (!user.length > 0) {
       const admin = await new User({
-        firstname: process.env.ADMIN_NAME,
-        lastname: process.env.ADMIN_NAME,
+        firstname: process.env.ADMIN_FIRSTNAME,
+        lastname: process.env.ADMIN_LASTNAME,
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASS,
         isAdmin: true,
