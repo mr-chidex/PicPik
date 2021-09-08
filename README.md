@@ -4,7 +4,7 @@ MERN stack app
 
 # PHOTO GALLARY
 
-A Photo Gallary app where users can download and upload Images.(https://github.com/mr-chidex/Dex_Photos_Backend)
+A Photo Gallary app where users can sigmnup, download and upload Images.
 
 ### Backend
 
