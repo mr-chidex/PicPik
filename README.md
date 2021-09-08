@@ -30,8 +30,8 @@ yarn start
 
 ## Preview
 
-<img  alt="png" src="./public/dexHome.jpg" />
-<img  alt="png" src="./public/dexProfile.png" />
+<img  alt="png" src="./frontend/public/dexHome.jpg" />
+<img  alt="png" src="./frontend/public/dexProfile.png" />
 ```
 Authentication
 Authorization
