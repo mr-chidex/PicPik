@@ -20,9 +20,9 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <div className="Header">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand logo" to="/">
           PicPik
         </Link>
         {/* <form className="form-inline my-2 my-lg-0">

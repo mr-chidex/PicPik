@@ -17,3 +17,10 @@
   padding: 0 !important;
   margin: 0 !important;
 }
+
+.Header .logo {
+  font-style: italic;
+  text-shadow: 9px 3px 8px #0cb88d;
+  font-weight: 900;
+  font-size: 2rem;
+}

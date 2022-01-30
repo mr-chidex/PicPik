@@ -14,7 +14,7 @@ const Footer = () => {
         >
           <strong>Mr-Chidex</strong>
         </a>{" "}
-        &copy; copyright 2021 - All rights reserved
+        &copy; copyright {new Date().getFullYear()} - All rights reserved
       </p>
     </footer>
   );

@@ -27,14 +27,20 @@ const Home = () => {
     history.push(`/image/${imageId}`);
   };
 
+  const searchHandler = (e) => {
+    e.preventDefault();
+
+    //unfinish
+  };
+
   return (
     <section className="Home">
       <div className="hero ">
         <div className="hero-content ">
-          <h1 className="text-light">Dex-Photos</h1>
+          <h1 className="text-light logo">PicPik</h1>
           <p>The internet source of free-usable-images</p>
           <p>Powered by creators everywhere.</p>
-          <form>
+          <form onSubmit={searchHandler}>
             <div className="form-group">
               <i className="fa fa-search search" aria-hidden="true"></i>
               <input
@@ -45,7 +51,7 @@ const Home = () => {
               />
             </div>
           </form>
-          <p>Trending: flower, wallpapers, backgrounds, happy, love</p>
+          <p>Trending: nature, wallpapers, backgrounds, tshirts, love</p>
         </div>
       </div>
 
