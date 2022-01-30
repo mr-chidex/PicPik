@@ -33,7 +33,7 @@ const Signup = () => {
   return (
     <div className="container">
       <div className="jumbotron">
-        <h4 className="text-center text-muted">Signup to DEX-PHOTOS</h4>
+        <h4 className="text-center text-muted">Signup to PicPik</h4>
       </div>
       <div className="w-75 mx-auto my-4">
         {alerts && (error || userRegister) && (

@@ -64,7 +64,7 @@ const Home = () => {
 
         {loading && (
           <div className="default-images container">
-            {[...Array(default_images)].map((img, index) => (
+            {[...Array(default_images)].map((_, index) => (
               <div
                 key={index}
                 className="default-container animate-flicker"

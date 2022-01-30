@@ -30,12 +30,23 @@ const Login = () => {
   return (
     <div className="container">
       <div className="jumbotron">
-        <h4 className="text-center text-muted">Welcome Back to DEX-PHOTOS</h4>
+        <h4 className="text-center text-muted">Welcome Back &#128513;</h4>
       </div>
       <div className="w-75 mx-auto my-4">
         {alerts && (error || userLogin) && (
           <Alerts message={message} type={error ? "danger" : "success"} />
         )}
+        <div
+          className="alert alert-info"
+          style={{ textAlign: "center" }}
+          role="alert"
+        >
+          <p>Don't need to signup to access dashboard.</p>
+          <p>
+            email : testuser@email.com &amp; password:
+            <b> 11111</b>
+          </p>
+        </div>
         <form onSubmit={signupHandler}>
           <div className="form-group">
             <label htmlFor="email">Email Address:</label>
