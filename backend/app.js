@@ -24,13 +24,13 @@ app.get("/", (req, res) => {
   });
 });
 
-//handle errors
+//@handle errors
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
   res.status(statusCode).json({ message: error.message || "Network Error" });
 });
 
-//connect to db and start server
+//@connect to db and start server
 mongoose
   .connect(process.env.DEX_PHOTOS, {
     useUnifiedTopology: true,
@@ -43,10 +43,12 @@ mongoose
     );
   })
   .then(async () => {
-    //create default admin login details if admin is not in database
+    //@create default admin login details if admin is not in database
+    //@create default test user details
     const user = await User.find();
     if (!user.length > 0) {
-      const admin = await new User({
+      //create admin
+      const admin = new User({
         firstname: process.env.ADMIN_FIRSTNAME,
         lastname: process.env.ADMIN_LASTNAME,
         email: process.env.ADMIN_EMAIL,
@@ -56,8 +58,19 @@ mongoose
       });
 
       await admin.save();
-
       console.log("Admin succesfully added");
+
+      //@create test user
+      const testUser = new User({
+        firstname: "test",
+        lastname: "user",
+        email: "testuser@email.com",
+        password: "11111",
+        images: [],
+      });
+
+      await testUser.save();
+      console.log("test user succesfully added");
     }
   })
   .catch((err) => {
