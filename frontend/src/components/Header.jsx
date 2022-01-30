@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { userLogoutAction } from "../redux/actions/userActions";
 import userIcon from "../assets/images/userIcon.png";
 import "./styles/Header.css";
@@ -22,7 +23,7 @@ const Header = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
         <Link className="navbar-brand" to="/">
-          Dex-Photos
+          PicPik
         </Link>
         {/* <form className="form-inline my-2 my-lg-0">
           <input

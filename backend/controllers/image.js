@@ -7,8 +7,12 @@ const foldername = "chi_splash";
 //@Route  POST /api/image/
 //@access    	Private
 //@desc      add new image
-const addImage = async (req, res, next) => {
+const addImage = async (req, res) => {
   if (!req.file) return res.status(400).json({ message: "no image selected" });
+
+  //check image size
+  if (req.file.size > 500000)
+    return res.status(400).json({ message: "image too large. min 500kb" });
 
   const imageCloud = await cloudinary.v2.uploader.upload(req.file.path, {
     folder: foldername,
@@ -46,10 +50,8 @@ const addImage = async (req, res, next) => {
 //@Route  GET /api/image/
 //@access    	Public
 //@desc      get all images
-const getImages = async (req, res, next) => {
-  const images = await Image.find().select("-__v");
-
-  if (!images) return res.staus(404).json({ message: "error getting images" });
+const getImages = async (_, res) => {
+  const images = await Image.find().select("-__v").sort({ _id: -1 });
 
   res.json({ images });
 };
@@ -57,7 +59,7 @@ const getImages = async (req, res, next) => {
 //@Route  GET /api/image/:imageId
 //@access    	Public
 //@desc      get image
-const getImage = async (req, res, next) => {
+const getImage = async (req, res) => {
   const imageId = req.params.imageId;
 
   if (!mongoose.isValidObjectId(imageId))
@@ -75,7 +77,7 @@ const getImage = async (req, res, next) => {
 //@Route  PUT /api/image/:imageId(image_id)
 //@access    	Private
 //@desc      delete image
-const deleteImage = async (req, res, next) => {
+const deleteImage = async (req, res) => {
   const imageId = req.params.imageId;
 
   if (!imageId) return res.status(400).json({ message: "invalid image id" });
