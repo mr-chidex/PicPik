@@ -46,7 +46,9 @@ const UploadImage = () => {
         )}
         <form onSubmit={upladImageHandler}>
           <div className="form-group">
-            <label htmlFor="image">Upload Image: </label>
+            <label htmlFor="image">
+              Upload Image <small>Max(500kb)</small>:{" "}
+            </label>
             <input
               type="file"
               onChange={imageChangeHandler}
