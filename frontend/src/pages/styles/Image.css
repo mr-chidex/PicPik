@@ -26,3 +26,9 @@
   margin-bottom: 1rem !important;
   width: fit-content;
 }
+
+.Image .loading {
+  display: grid;
+  place-items: center;
+  margin-top: 3rem;
+}

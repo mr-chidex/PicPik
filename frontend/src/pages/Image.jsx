@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useHistory } from "react-router-dom";
+import { Grid } from "react-loader-spinner";
 
 import "./styles/Image.css";
 import { getImageActions } from "../redux/actions/imageActions";
@@ -70,46 +71,61 @@ const Image = () => {
             />
           )}
         </div>
-        <p>
-          author's name:
-          {success && `${image.author.firstname}  ${image.author.lastname}`}
-        </p>
-        <p>author's email: {success && image.author.email}</p>
-        {image && (
-          <div className="d-flex flex-column">
-            <a href={image.url} target="_blank" rel="noopener noreferrer">
+        {success && (
+          <p>
+            author's name: &nbsp;{image?.author?.firstname}{" "}
+            {image?.author?.lastname}
+          </p>
+        )}
+        {success && <p>author's email: {image?.author?.email}</p>}
+        <div className="d-flex flex-column">
+          {image?.url ? (
+            <a href={image?.url} target="_blank" rel="noopener noreferrer">
               <button className="btn btn-outline-success">
-                <i className="fa fa-download" aria-hidden="true"></i> Download
-                free
+                <i
+                  className="fa fa-download"
+                  aria-hidden="true"
+                  disabled={success}
+                ></i>{" "}
+                Download free
               </button>
             </a>
-            <button className="btn btn-outline-primary" disabled>
-              <i className="fa fa-thumbs-o-up"></i> Like
+          ) : (
+            <button className="btn btn-outline-success">
+              <i className="fa fa-download" aria-hidden="true" disabled></i>{" "}
+              Download free
             </button>
-            <button className="btn btn-outline-primary" disabled>
-              <i className="fa fa-share" aria-hidden="true"></i> Share
-            </button>
-            <button className="btn btn-outline-info" disabled>
-              <i className="fa fa-info-circle" aria-hidden="true"></i> Info
-            </button>
-            {query &&
-              (deleteLoading ? (
-                <button className="btn btn-outline-danger" disabled>
-                  <i className="fa fa-trash" aria-hidden="true"></i> Deleting...
-                </button>
-              ) : (
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={delteImageHandler}
-                >
-                  <i className="fa fa-trash" aria-hidden="true"></i> Delete
-                </button>
-              ))}
-          </div>
-        )}
+          )}
+          <button className="btn btn-outline-primary" disabled>
+            <i className="fa fa-thumbs-o-up"></i> Like
+          </button>
+          <button className="btn btn-outline-primary" disabled>
+            <i className="fa fa-share" aria-hidden="true"></i> Share
+          </button>
+          <button className="btn btn-outline-info" disabled>
+            <i className="fa fa-info-circle" aria-hidden="true"></i> Info
+          </button>
+          {query &&
+            (deleteLoading ? (
+              <button className="btn btn-outline-danger" disabled>
+                <i className="fa fa-trash" aria-hidden="true"></i> Deleting...
+              </button>
+            ) : (
+              <button
+                className="btn btn-outline-danger"
+                onClick={delteImageHandler}
+              >
+                <i className="fa fa-trash" aria-hidden="true"></i> Delete
+              </button>
+            ))}
+        </div>
       </div>
       <div className="image-container mx-auto col">
-        {loading && <h3 className="text-center">loading...</h3>}
+        {loading && (
+          <div className="loading">
+            <Grid heigth="100" width="100" color="grey" ariaLabel="loading" />
+          </div>
+        )}
 
         {error && (
           <div className={`alert alert-danger fade show`} role="alert">

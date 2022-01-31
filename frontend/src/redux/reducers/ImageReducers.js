@@ -25,7 +25,10 @@ export const getImagesReducer = (state = [], action) => {
   }
 };
 
-export const getImageReducer = (state = {}, action) => {
+export const getImageReducer = (
+  state = { success: false, loading: false },
+  action
+) => {
   switch (action.type) {
     case GET_IMAGE_REQUEST:
       return { loading: true };
