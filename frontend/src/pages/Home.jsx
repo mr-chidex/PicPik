@@ -19,9 +19,20 @@ const Home = () => {
     dispatch(getImagesActions());
   }, [dispatch]);
 
-  const { loading, error, images, success, message } = useSelector(
-    (state) => state.all_images
-  );
+  const {
+    loading,
+    error,
+    images,
+    success,
+    message,
+    total = 38,
+  } = useSelector((state) => state.all_images);
+
+  //per column for desktop
+  const numImagePerColD = Math.ceil(total / 4);
+
+  //per column for mobile
+  const numImagePerColM = Math.ceil(total / 2);
 
   const imageHandler = (imageId) => {
     history.push(`/image/${imageId}`);
@@ -74,16 +85,87 @@ const Home = () => {
         )}
 
         {success && (
-          <div className="images container">
-            {images.map((img) => (
-              <div
-                key={img._id}
-                className="image-container"
-                onClick={() => imageHandler(img._id)}
-              >
-                <img src={img.url} alt={img.name} />
+          <div className="container">
+            <div className="images desktop">
+              <div className="column">
+                {images.slice(0, numImagePerColD).map((img) => (
+                  <div
+                    key={img._id}
+                    className="image-container"
+                    onClick={() => imageHandler(img._id)}
+                  >
+                    <img src={img.url} alt={img.name} />
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="column">
+                {" "}
+                {images
+                  .slice(numImagePerColD, numImagePerColD * 2)
+                  .map((img) => (
+                    <div
+                      key={img._id}
+                      className="image-container"
+                      onClick={() => imageHandler(img._id)}
+                    >
+                      <img src={img.url} alt={img.name} />
+                    </div>
+                  ))}
+              </div>
+              <div className="column">
+                {images
+                  .slice(numImagePerColD * 2, numImagePerColD * 3)
+                  .map((img) => (
+                    <div
+                      key={img._id}
+                      className="image-container"
+                      onClick={() => imageHandler(img._id)}
+                    >
+                      <img src={img.url} alt={img.name} />
+                    </div>
+                  ))}
+              </div>
+              <div className="column">
+                {images
+                  ?.slice(numImagePerColD * 3, numImagePerColD * 4)
+                  .map((img) => (
+                    <div
+                      key={img._id}
+                      className="image-container"
+                      onClick={() => imageHandler(img._id)}
+                    >
+                      <img src={img.url} alt={img.name} />
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            <div className="images mobile">
+              <div className="column">
+                {images.slice(0, numImagePerColM).map((img) => (
+                  <div
+                    key={img._id}
+                    className="image-container"
+                    onClick={() => imageHandler(img._id)}
+                  >
+                    <img src={img.url} alt={img.name} />
+                  </div>
+                ))}
+              </div>
+              <div className="column">
+                {images
+                  ?.slice(numImagePerColM, numImagePerColM * 2)
+                  .map((img) => (
+                    <div
+                      key={img._id}
+                      className="image-container"
+                      onClick={() => imageHandler(img._id)}
+                    >
+                      <img src={img.url} alt={img.name} />
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
