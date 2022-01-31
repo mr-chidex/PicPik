@@ -12,7 +12,12 @@ export const getImagesReducer = (state = [], action) => {
     case GET_IMAGES_REQUEST:
       return { loading: true };
     case GET_IMAGES_SUCCESS:
-      return { loading: false, images: action.payload, success: true };
+      return {
+        loading: false,
+        images: action.payload?.images,
+        total: action.payload?.total,
+        success: true,
+      };
     case GET_IMAGES_FAILED:
       return { loading: false, error: true, message: action.payload };
     default:

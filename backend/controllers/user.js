@@ -71,6 +71,12 @@ const signin = async (req, res, next) => {
 const updateProfile = async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
+  //check if test user
+  if (req.user.isTestUser)
+    return res
+      .status(403)
+      .json({ message: "Access denied. Test user cannot update profile." });
+
   if (!user) return res.status(400).json({ message: "User does not exist" });
 
   const error = validationResult(req);
@@ -121,6 +127,12 @@ const updateProfile = async (req, res, next) => {
 
 const passwordReset = async (req, res, next) => {
   const user = await User.findById(req.user._id);
+
+  //check if test user
+  if (req.user.isTestUser)
+    return res
+      .status(403)
+      .json({ message: "Access denied. Test user cannot update password." });
 
   if (!user) return res.status(400).json({ message: "User does not exist" });
 

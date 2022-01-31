@@ -2,9 +2,13 @@
 
 MERN stack app
 
-# PHOTO GALLARY
+# PicPik
 
 A Photo Gallary app where users can sigmnup, download and upload Images.
+
+```
+Idea from unsplash
+```
 
 ### Backend
 

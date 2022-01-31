@@ -38,6 +38,7 @@ const userSchema = new Schema(
       },
     ],
     isAdmin: { type: Boolean, default: false },
+    isTestUser: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

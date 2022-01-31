@@ -22,7 +22,7 @@ const addImage = async (req, res) => {
     return res.status(400).json({ message: "error saving image" });
 
   //used split to get public_id because a folder was specified for the image
-  const image = await new Image({
+  const image = new Image({
     name: req.file.originalname,
     url: imageCloud.secure_url,
     image_id: imageCloud.public_id.split("/")[1],
@@ -53,7 +53,9 @@ const addImage = async (req, res) => {
 const getImages = async (_, res) => {
   const images = await Image.find().select("-__v").sort({ _id: -1 });
 
-  res.json({ images });
+  const total = await Image.countDocuments();
+
+  res.json({ images, total });
 };
 
 //@Route  GET /api/image/:imageId
@@ -90,8 +92,8 @@ const deleteImage = async (req, res) => {
 
   if (!image)
     return res
-      .status(401)
-      .json({ message: "Unauthorize access deleting this image" });
+      .status(403)
+      .json({ message: "Access denied. Can't delete image." });
 
   //delete image from cloudinary
   await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);

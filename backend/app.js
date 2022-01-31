@@ -4,6 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 const { User } = require("./models/user");
 const userRoutes = require("./routes/user");
@@ -25,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 //@handle errors
-app.use((error, req, res, next) => {
+app.use((error, _, res) => {
   const statusCode = error.statusCode || 500;
   res.status(statusCode).json({ message: error.message || "Network Error" });
 });
@@ -38,9 +39,7 @@ mongoose
   })
   .then(() => {
     console.log("db connected");
-    app.listen(process.env.PORT || 5000, () =>
-      console.log("server running...")
-    );
+    app.listen(PORT, () => console.log(`server running...on port - ${PORT}`));
   })
   .then(async () => {
     //@create default admin login details if admin is not in database
@@ -67,6 +66,7 @@ mongoose
         email: "testuser@email.com",
         password: "11111",
         images: [],
+        isTestUser: true,
       });
 
       await testUser.save();

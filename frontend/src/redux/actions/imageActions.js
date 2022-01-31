@@ -13,7 +13,10 @@ export const getImagesActions = () => async (dispatch) => {
     dispatch({ type: GET_IMAGES_REQUEST });
 
     const images = await dexSplash.get("/image");
-    dispatch({ type: GET_IMAGES_SUCCESS, payload: images.data.images });
+    dispatch({
+      type: GET_IMAGES_SUCCESS,
+      payload: { images: images.data.images, total: images.data.total },
+    });
   } catch (error) {
     dispatch({
       type: GET_IMAGES_FAILED,
