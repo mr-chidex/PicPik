@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
     const decodeToken = JWT.verify(token, process.env.SECRET_KEY);
 
     // console.log("decodeToken", decodeToken);
-    if (!decodeToken) res.status(401).json({ message: "Unauthorized access" });
+    if (!decodeToken) return res.status(401).json({ message: "Unauthorized access" });
 
     const user = await User.findById(decodeToken.payload);
     req.user = user;
