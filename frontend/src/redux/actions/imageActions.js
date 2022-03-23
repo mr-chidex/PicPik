@@ -12,7 +12,7 @@ export const getImagesActions = () => async (dispatch) => {
   try {
     dispatch({ type: GET_IMAGES_REQUEST });
 
-    const images = await dexSplash.get("/image");
+    const images = await dexSplash.get("/images");
     dispatch({
       type: GET_IMAGES_SUCCESS,
       payload: { images: images.data.images, total: images.data.total },
@@ -32,7 +32,7 @@ export const getImageActions = (imageId) => async (dispatch) => {
   try {
     dispatch({ type: GET_IMAGE_REQUEST });
 
-    const image = await dexSplash.get(`/image/${imageId}`);
+    const image = await dexSplash.get(`/images/${imageId}`);
     dispatch({ type: GET_IMAGE_SUCCESS, payload: image.data });
   } catch (error) {
     dispatch({

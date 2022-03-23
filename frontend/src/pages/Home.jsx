@@ -35,7 +35,7 @@ const Home = () => {
   const numImagePerColM = Math.ceil(total / 2);
 
   const imageHandler = (imageId) => {
-    history.push(`/image/${imageId}`);
+    history.push(`/images/${imageId}`);
   };
 
   const searchHandler = (e) => {

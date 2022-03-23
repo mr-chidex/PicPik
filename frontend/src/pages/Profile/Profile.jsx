@@ -22,7 +22,7 @@ const Profile = () => {
   const images = user.images;
 
   const imageHandler = (imageId, image_id) => {
-    history.push(`/image/${imageId}?image_id=${image_id}`);
+    history.push(`/images/${imageId}?image_id=${image_id}`);
   };
 
   return (

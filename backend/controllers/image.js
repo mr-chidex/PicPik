@@ -50,13 +50,17 @@ const addImage = async (req, res) => {
 //@Route  GET /api/image/
 //@access    	Public
 //@desc      get all images
-const getImages = async (_, res) => {
+const getImages = async (req, res) => {
   const total = await Image.countDocuments();
   const pageNo = parseInt(req.query._start) || 1;
   const limit = parseInt(req.query._limit) || total;
   const _start = (pageNo - 1) * limit;
-  
-  const images = await Image.find().select("-__v").sort({ _id: -1 }).skip(_start).limit(limit);
+
+  const images = await Image.find()
+    .select("-__v")
+    .sort({ _id: -1 })
+    .skip(_start)
+    .limit(limit);
 
   res.json({ images, total });
 };

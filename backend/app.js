@@ -15,8 +15,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/user", userRoutes);
-app.use("/api/image", imageRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/images", imageRoutes);
 
 app.get("/", (req, res) => {
   res.json({

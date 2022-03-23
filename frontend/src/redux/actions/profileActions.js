@@ -38,7 +38,7 @@ export const uploadNewImage = (image) => async (dispatch, getState) => {
             : "",
       },
     };
-    const data = await dexSplash.post("/image", formData, config);
+    const data = await dexSplash.post("/images", formData, config);
 
     dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: data.data });
     dispatch({ type: UPDATE_USER_IMAGES, payload: data.data });
@@ -73,7 +73,7 @@ export const deleteImageHandler = (image_id) => async (dispatch, getState) => {
             : "",
       },
     };
-    const data = await dexSplash.delete("/image/" + image_id, config);
+    const data = await dexSplash.delete("/images/" + image_id, config);
 
     dispatch({ type: DELETE_IMAGE_SUCCESS, payload: data.data });
     dispatch({ type: UPDATE_USER_IMAGES_DELETED, payload: image_id });
@@ -109,7 +109,7 @@ export const resetPasswordAction =
         },
       };
       const data = await dexSplash.post(
-        "/user/password-reset",
+        "/users/password-reset",
         { currentPassword, newPassword },
         config
       );
@@ -151,7 +151,7 @@ export const updateProfileAction =
         },
       };
 
-      const data = await dexSplash.post("/user/update", formData, config);
+      const data = await dexSplash.post("/users/update", formData, config);
 
       dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.data });
 
