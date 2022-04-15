@@ -1,61 +1,53 @@
-# MERN STACK
-
-MERN stack app
-
 # PicPik
 
 A Photo Gallary app where users can sigmnup, download and upload Images.
 
 ```
-Idea from unsplash
+MERN APP - Idea from unsplash
 ```
+## Built With
 
-### Backend
+- Node.js
+- Mongo DB
+- Express
+- Git
+- Json Web Token
+- Postman
+- React JS
+- Bootstrap
+- Redux
+
+## Features
 
 - Image uploads
 - User signup and signin
 - Authorization and Authentication etc.
 
-#### Dev Server
+## Running this project locally
+    
+    $ yarn install
+    $ yarn dev
 
-```
-yarn dev
-```
 
-### Frontend
+    $ cd frontend
+    $yarn install
+    $ yarn start
 
-- Redux
-- Authentication and Authentication.
+## Clone this project
 
-```
-cd frontend
-yarn start
-```
-
+    $ https://github.com/mr-chidex/PicPik.git
+    $ cd PicPik
+    
 ## Preview
 
 <img  alt="png" src="./frontend/public/dexHome.jpg" />
 <img  alt="png" src="./frontend/public/dexProfile.png" />
-```
-Authentication
-Authorization
-```
 
-**By Mr-Chidex**
 
-## Available Scripts
+## Show your support
 
-In the project directory, you can run:
+Give a ⭐️ if you like this project!
 
-### `yarn start`
+## Copyright
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Copyright (c) mr-chidex
