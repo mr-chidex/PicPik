@@ -30,7 +30,7 @@ MERN APP - Idea from unsplash
 
 
     $ cd frontend
-    $yarn install
+    $ yarn install
     $ yarn start
 
 ## Clone this project
