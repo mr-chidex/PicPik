@@ -35,7 +35,7 @@ MERN APP - Idea from unsplash
 
 ## Clone this project
 
-    $ https://github.com/mr-chidex/PicPik.git
+    $ git clone https://github.com/mr-chidex/PicPik.git
     $ cd PicPik
     
 ## Preview
