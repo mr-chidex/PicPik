@@ -1,12 +1,10 @@
 import React from "react";
 
-import "./styles/Footer.css";
-
 const Footer = () => {
   return (
     <footer className="footer border-top">
       <p className="text-center  mt-2">
-        Designed by{" "}
+        <small> Designed by&nbsp;</small>
         <a
           href="http://www.github.com/mr-chidex"
           target="_blank"
@@ -14,7 +12,9 @@ const Footer = () => {
         >
           <strong>Mr-Chidex</strong>
         </a>{" "}
-        &copy; copyright {new Date().getFullYear()} - All rights reserved
+        <small>
+          &copy; copyright {new Date().getFullYear()} - All rights reserved
+        </small>
       </p>
     </footer>
   );

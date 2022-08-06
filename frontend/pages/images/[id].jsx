@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Grid } from "react-loader-spinner";
 
-import "./styles/Image.css";
-import { getImageActions } from "../redux/actions/imageActions";
-import { deleteImageHandler } from "../redux/actions/profileActions";
-import userIcon from "../assets/images/userIcon.png";
-import Alerts from "../components/Alerts";
+import { getImageActions } from "../../redux/actions/imageActions";
+import { deleteImageHandler } from "../../redux/actions/profileActions";
+import Alerts from "../../components/Alerts";
 
 const Image = () => {
   const [alerts, setAlerts] = useState(false);
   const dispatch = useDispatch();
-  const params = useParams();
-  const location = useLocation();
-  const history = useHistory();
+  const router = useRouter();
+
+  const { image_id, id } = router.query;
 
   //makes new page to always start from the top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const query =
-    location.search && location.search.split("=")
-      ? location.search.split("=")[1]
-      : "";
-
   useEffect(() => {
-    dispatch(getImageActions(params.imageId));
-  }, [dispatch, params.imageId]);
+    dispatch(getImageActions(id));
+  }, [dispatch, id]);
 
   const { loading, error, image, success, message } = useSelector(
     (state) => state.single_image
@@ -42,7 +35,7 @@ const Image = () => {
   } = useSelector((state) => state.deleted_image);
 
   const delteImageHandler = () => {
-    dispatch(deleteImageHandler(query));
+    dispatch(deleteImageHandler(image_id));
     setAlerts(true);
   };
 
@@ -66,7 +59,7 @@ const Image = () => {
         <div className="author-image">
           {success && (
             <img
-              src={image.author.image || userIcon}
+              src={image.author.image || "/assets/images/userIcon.png"}
               alt={`${image.author.firstname} ${image.author.lastname}`}
             />
           )}
@@ -105,7 +98,7 @@ const Image = () => {
           <button className="btn btn-outline-info" disabled>
             <i className="fa fa-info-circle" aria-hidden="true"></i> Info
           </button>
-          {query &&
+          {image_id &&
             (deleteLoading ? (
               <button className="btn btn-outline-danger" disabled>
                 <i className="fa fa-trash" aria-hidden="true"></i> Deleting...

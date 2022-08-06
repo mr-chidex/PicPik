@@ -1,43 +1,43 @@
-.Home .logo {
+.logo {
   font-style: italic;
   text-shadow: 10px 5px 10px black;
   font-weight: 900;
   font-size: 4rem;
 }
 
-.Home .images {
+.images {
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px;
 }
 
-.Home .column {
+.column {
   flex: 25%;
   padding: 0 4px;
 }
 
-.Home .column img {
+.column img {
   margin-top: 8px;
   vertical-align: middle;
 }
 
-.Home .image-container {
+.imageContainer {
   cursor: zoom-in;
 }
 
-.Home .desktop {
+.desktop {
   display: none;
 }
 
-.Home .image-container img {
+.imageContainer img {
   width: 100%;
 }
 
-.Home .hero {
+.hero {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("../../assets/images/jonatan-pie-EvKBHBGgaUo-unsplash\ \(1\).jpg");
+  background-image: url("/assets/images/jonatan-pie-EvKBHBGgaUo-unsplash\ \(1\).jpg");
   background-color: #111;
   padding: 1rem;
   height: 400px;
@@ -46,15 +46,15 @@
   margin-bottom: 2.5rem;
 }
 
-.Home .form-group {
+.formGroup {
   position: relative;
 }
 
-.Home .form-control {
+.formControl {
   padding-left: 3rem;
 }
 
-.Home .search {
+.search {
   position: absolute;
   left: 1rem;
   top: 25%;
@@ -62,7 +62,7 @@
   color: #4bbf73;
 }
 
-.hero .hero-content {
+.hero .heroContent {
   width: 70%;
   position: absolute;
   left: 50%;
@@ -71,14 +71,14 @@
 }
 
 @media (min-width: 700px) {
-  .Home .mobile {
+  .mobile {
     display: none;
   }
-  .Home .desktop {
+  .desktop {
     display: flex;
   }
 
-  .Home .image-container {
+  .imageContainer {
     width: 100%;
   }
 }

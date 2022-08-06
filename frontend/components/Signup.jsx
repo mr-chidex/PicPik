@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Alerts from "../components/Alerts";
+import Alerts from "./Alerts";
 
 import { userSignUpAction } from "../redux/actions/userActions";
 

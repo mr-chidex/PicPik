@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userSignInAction } from "../redux/actions/userActions";
-import Alerts from "../components/Alerts";
+import Alerts from "./Alerts";
 
 const Login = () => {
   const [email, setEmail] = useState("");

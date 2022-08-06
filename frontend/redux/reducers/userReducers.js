@@ -25,7 +25,12 @@ export const userSignupReducer = (state = {}, action) => {
 };
 
 export const userLoginReducer = (
-  state = { user: JSON.parse(localStorage.getItem("DEX_SPLASH_USER")) },
+  state = {
+    user:
+      typeof window !== "undefined"
+        ? JSON.parse(localStorage.getItem("DEX_SPLASH_USER"))
+        : {},
+  },
   action
 ) => {
   switch (action.type) {
