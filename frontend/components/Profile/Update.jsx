@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { generateBase64FromImage } from "../../utils/image";
-import Alerts from "../../components/Alerts";
+import Alerts from "../Alerts";
 
 import { updateProfileAction } from "../../redux/actions/profileActions";
 
@@ -13,11 +13,6 @@ const UpdateProfile = () => {
   const [lastname, setLastName] = useState(user.lastname);
   const [imagePreview, setImagePreview] = useState("");
   const [alerts, setAlerts] = useState(false);
-
-  //makes new page to always start from the top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   let image = useRef("");
   const dispatch = useDispatch();
@@ -44,7 +39,7 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="container">
+    <section className="container">
       <div className="w-75 mx-auto my-4">
         {alerts && (error || success) && (
           <Alerts message={message} type={error ? "danger" : "success"} />
@@ -102,7 +97,7 @@ const UpdateProfile = () => {
           )}
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

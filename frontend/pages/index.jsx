@@ -11,11 +11,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const default_images = 10;
 
-  //makes new page to always start from the top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   useEffect(() => {
     dispatch(getImagesActions());
   }, [dispatch]);
@@ -48,10 +43,10 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>PicPik | Home</title>
+        <title>PicPik | A place for all</title>
       </Head>
 
-      <section className={classes.Home}>
+      <main className={classes.Home}>
         <div className={classes.hero}>
           <div className={classes.heroContent}>
             <h1 className={["text-light", classes.logo].join(" ")}>PicPik</h1>
@@ -174,7 +169,7 @@ const Home = () => {
             </div>
           )}
         </div>
-      </section>
+      </main>
     </>
   );
 };

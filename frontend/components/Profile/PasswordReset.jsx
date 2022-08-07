@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Alerts from "../../components/Alerts";
+import Alerts from "../Alerts";
 import { resetPasswordAction } from "../../redux/actions/profileActions";
 
 const PasswordReset = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [alerts, setAlerts] = useState(false);
-
-  //makes new page to always start from the top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const dispatch = useDispatch();
   const { loading, success, message, error } = useSelector(
@@ -29,7 +24,7 @@ const PasswordReset = () => {
   };
 
   return (
-    <div className="container">
+    <section className="container">
       <div className="w-75 mx-auto my-4">
         {alerts && (error || success) && (
           <Alerts message={message} type={error ? "danger" : "success"} />
@@ -68,7 +63,7 @@ const PasswordReset = () => {
           )}
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

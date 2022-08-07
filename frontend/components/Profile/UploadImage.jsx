@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Alerts from "../../components/Alerts";
+import Alerts from "../Alerts";
 import { uploadNewImage } from "../../redux/actions/profileActions";
 import { generateBase64FromImage } from "../../utils/image";
 
@@ -39,7 +39,7 @@ const UploadImage = () => {
   };
 
   return (
-    <div className="container">
+    <section className="container">
       <div className="w-75 mx-auto my-4">
         {alerts && (error || success) && (
           <Alerts message={message} type={error ? "danger" : "success"} />
@@ -78,7 +78,7 @@ const UploadImage = () => {
           )}
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

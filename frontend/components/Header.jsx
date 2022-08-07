@@ -12,6 +12,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(userLogoutAction());
+    router.replace("/");
   };
 
   const submitPhotoHandler = () => {
