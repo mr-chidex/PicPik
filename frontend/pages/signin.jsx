@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { userSignInAction } from "../redux/actions/userActions";
 import Alerts from "../components/Alerts";
-import Head from "next/head";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,15 +22,13 @@ const Login = () => {
     if (user) {
       router.replace("/");
     }
-  }, []);
+  }, [user]);
 
   const signinHandler = (e) => {
     e.preventDefault();
 
     dispatch(userSignInAction(email, password));
     setAlerts(true);
-
-    router.replace("/profile");
   };
 
   return (
@@ -46,7 +44,7 @@ const Login = () => {
           <h4 className="text-center text-muted">Welcome Back &#128513;</h4>
         </div>
         <div className="w-75 mx-auto my-4">
-          {alerts && (error || userLogin) && (
+          {alerts && error && (
             <Alerts message={message} type={error ? "danger" : "success"} />
           )}
           <div

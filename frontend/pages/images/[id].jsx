@@ -1,32 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { Grid } from "react-loader-spinner";
+import Head from "next/head";
 
 import { getImageActions } from "../../redux/actions/imageActions";
 import { deleteImageHandler } from "../../redux/actions/profileActions";
 import Alerts from "../../components/Alerts";
-import Head from "next/head";
+import dexSplash from "../../dexSplash";
 
-const Image = () => {
+export const getStaticPaths = async () => {
+  const { data } = await dexSplash.get("/images");
+
+  const images = data?.images;
+
+  const paths = images?.map((image) => ({ params: { id: image._id } }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async (context) => {
+  const imageId = context.params.id;
+
+  const { data } = await dexSplash.get(`/images/${imageId}`);
+
+  return {
+    props: {
+      image: data,
+    },
+    revalidate: 60,
+  };
+};
+
+const Image = ({ image }) => {
   const [alerts, setAlerts] = useState(false);
   const dispatch = useDispatch();
-  const router = useRouter();
 
-  const { image_id, id } = router.query;
-
-  //makes new page to always start from the top
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    dispatch(getImageActions(id));
-  }, [dispatch, id]);
-
-  const { loading, error, image, success, message } = useSelector(
-    (state) => state.single_image
-  );
+  const { user } = useSelector((state) => state.userLogin);
 
   const {
     loading: deleteLoading,
@@ -36,23 +47,9 @@ const Image = () => {
   } = useSelector((state) => state.deleted_image);
 
   const delteImageHandler = () => {
-    dispatch(deleteImageHandler(image_id));
+    dispatch(deleteImageHandler(image?._id));
     setAlerts(true);
   };
-
-  useEffect(() => {
-    //take user to profile page after deleting an image
-    let timer;
-    if (alerts && deleteSuccess) {
-      timer = setTimeout(() => {
-        history.push("/profile");
-      }, 3000);
-    }
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [alerts, deleteSuccess, history]);
 
   return (
     <>
@@ -63,36 +60,27 @@ const Image = () => {
       <main className="container Image row mx-auto my-3">
         <div className="col-sm-3">
           <div className="author-image">
-            {success && (
-              <img
-                src={image.author.image || "/assets/images/userIcon.png"}
-                alt={`${image.author.firstname} ${image.author.lastname}`}
-              />
-            )}
+            <img
+              src={image?.author?.image || "/assets/images/userIcon.png"}
+              alt={`${image?.author?.firstname} ${image?.author?.lastname}`}
+            />
           </div>
-          {success && (
-            <p>
-              author's name: &nbsp;{image?.author?.firstname}{" "}
-              {image?.author?.lastname}
-            </p>
-          )}
-          {success && <p>author's email: {image?.author?.email}</p>}
+
+          <p>
+            Author: &nbsp;{image?.author?.firstname} {image?.author?.lastname}
+          </p>
+
           <div className="d-flex flex-column">
             {image?.url ? (
               <a href={image?.url} target="_blank" rel="noopener noreferrer">
                 <button className="btn btn-outline-success">
-                  <i
-                    className="fa fa-download"
-                    aria-hidden="true"
-                    disabled={success}
-                  ></i>{" "}
-                  Download free
+                  <i className="fa fa-download" aria-hidden="true"></i> Download
                 </button>
               </a>
             ) : (
               <button className="btn btn-outline-success">
                 <i className="fa fa-download" aria-hidden="true" disabled></i>{" "}
-                Download free
+                Download
               </button>
             )}
             <button className="btn btn-outline-primary" disabled>
@@ -104,7 +92,8 @@ const Image = () => {
             <button className="btn btn-outline-info" disabled>
               <i className="fa fa-info-circle" aria-hidden="true"></i> Info
             </button>
-            {image_id &&
+            {user &&
+              user?.email === image?.author?.email &&
               (deleteLoading ? (
                 <button className="btn btn-outline-danger" disabled>
                   <i className="fa fa-trash" aria-hidden="true"></i> Deleting...
@@ -120,31 +109,28 @@ const Image = () => {
           </div>
         </div>
         <div className="image-container mx-auto col">
-          {loading && (
+          {/* {loading && (
             <div className="loading">
               <Grid heigth="100" width="100" color="grey" ariaLabel="loading" />
             </div>
-          )}
-
-          {error && (
+          )} */}
+          {/* {error && (
             <div className={`alert alert-danger fade show`} role="alert">
               {message}
             </div>
-          )}
-
+          )} */}
           {alerts && (deleteError || deleteSuccess) && (
             <Alerts
               message={deleteMessage}
               type={deleteError ? "danger" : "success"}
             />
           )}
-          {success && (
-            <img
-              className="img d-block mx-auto"
-              src={image.url}
-              alt={image.name}
-            />
-          )}
+
+          <img
+            className="img d-block mx-auto"
+            src={image?.url}
+            alt={image?.name}
+          />
         </div>
       </main>
     </>

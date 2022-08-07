@@ -73,6 +73,7 @@ export const deleteImageHandler = (image_id) => async (dispatch, getState) => {
             : "",
       },
     };
+
     const data = await dexSplash.delete("/images/" + image_id, config);
 
     dispatch({ type: DELETE_IMAGE_SUCCESS, payload: data.data });

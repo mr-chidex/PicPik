@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 import Alerts from "../components/Alerts";
 import { userSignUpAction } from "../redux/actions/userActions";
-import Head from "next/head";
-import { useRouter } from "next/router";
 
 const Signup = () => {
   const [firstname, setFirstName] = useState("");

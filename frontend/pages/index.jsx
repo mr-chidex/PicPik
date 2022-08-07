@@ -1,28 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
 
 import classes from "../styles/Home.module.css";
-import { getImagesActions } from "../redux/actions/imageActions";
 import Head from "next/head";
+import dexSplash from "../dexSplash";
 
-const Home = () => {
-  const history = useRouter();
-  const dispatch = useDispatch();
-  const default_images = 10;
+export const getStaticProps = async () => {
+  const { data } = await dexSplash.get("/images");
 
-  useEffect(() => {
-    dispatch(getImagesActions());
-  }, [dispatch]);
+  return {
+    props: {
+      images: data?.images || [],
+      total: data?.total || 1,
+    },
+    revalidate: 60,
+  };
+};
 
-  const {
-    loading,
-    error,
-    images,
-    success,
-    message,
-    total = 38,
-  } = useSelector((state) => state.all_images);
+const Home = ({ images, total }) => {
+  const router = useRouter();
 
   //per column for desktop
   const numImagePerColD = Math.ceil(total / 4);
@@ -31,7 +27,7 @@ const Home = () => {
   const numImagePerColM = Math.ceil(total / 2);
 
   const imageHandler = (imageId) => {
-    history.push(`/images/${imageId}`);
+    router.push(`/images/${imageId}`);
   };
 
   const searchHandler = (e) => {
@@ -68,24 +64,7 @@ const Home = () => {
         </div>
 
         <div>
-          {error && (
-            <div className={`alert alert-danger fade show`} role="alert">
-              {message}
-            </div>
-          )}
-
-          {loading && (
-            <div className="default-images container">
-              {[...Array(default_images)].map((_, index) => (
-                <div
-                  key={index}
-                  className="default-container animate-flicker"
-                ></div>
-              ))}
-            </div>
-          )}
-
-          {success && (
+          {images && (
             <div className="container">
               <div className={[classes.images, classes.desktop].join(" ")}>
                 <div className={classes.column}>

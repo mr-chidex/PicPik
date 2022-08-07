@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-
 import Head from "next/head";
 import { useRouter } from "next/router";
+
 import UpdateProfile from "../../components/Profile/Update";
 import UpdateImage from "../../components/Profile/UploadImage";
 import PasswordReset from "../../components/Profile/PasswordReset";
