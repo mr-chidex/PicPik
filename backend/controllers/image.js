@@ -105,12 +105,12 @@ const deleteImage = async (req, res) => {
   //delete image from cloudinary
   await cloudinary.v2.uploader.destroy(`${foldername}/${image?.image_id}`);
 
-  //delete from Image db
-  await Image.deleteOne({ _id: imageId });
-
   //remove image from user's image db
   const user = req.user;
   user.images = user.images.filter((img) => img.image_id !== image?.image_id);
+
+  //delete from Image db
+  await Image.deleteOne({ _id: imageId });
 
   user.save();
 
