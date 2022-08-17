@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+.user-image_mobile {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
 .user-image img {
   width: 100%;
   height: 100%;
@@ -23,4 +29,61 @@
   text-shadow: 9px 3px 8px #0cb88d;
   font-weight: 900;
   font-size: 2rem;
+}
+
+.submit-photo_btn {
+  display: none;
+}
+
+@media (min-width: 593px) {
+  .submit-photo_btn {
+    display: inline-block;
+  }
+}
+
+.slider {
+  width: 80%;
+  height: 100vh;
+  background-color: #3f3f3f;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slider .content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider li {
+  margin-right: 0;
+}
+
+.cancel {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5rem;
+  color: #4bbf73;
+  cursor: pointer;
+}
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 200;
+}
+
+.logo-mobile {
+  margin-top: 4rem;
 }

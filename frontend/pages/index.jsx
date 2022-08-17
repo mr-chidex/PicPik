@@ -20,11 +20,7 @@ export const getStaticProps = async () => {
 const Home = ({ images, total }) => {
   const router = useRouter();
 
-  //per column for desktop
   const numImagePerColD = Math.ceil(total / 4);
-
-  //per column for mobile
-  const numImagePerColM = Math.ceil(total / 2);
 
   const imageHandler = (imageId) => {
     router.push(`/images/${imageId}`);
@@ -107,33 +103,6 @@ const Home = ({ images, total }) => {
                 <div className={classes.column}>
                   {images
                     ?.slice(numImagePerColD * 3, numImagePerColD * 4)
-                    .map((img) => (
-                      <div
-                        key={img._id}
-                        className={classes.imageContainer}
-                        onClick={() => imageHandler(img._id)}
-                      >
-                        <img src={img.url} alt={img.name} />
-                      </div>
-                    ))}
-                </div>
-              </div>
-
-              <div className={[classes.images, classes.mobile].join(" ")}>
-                <div className={classes.column}>
-                  {images.slice(0, numImagePerColM).map((img) => (
-                    <div
-                      key={img._id}
-                      className={classes.imageContainer}
-                      onClick={() => imageHandler(img._id)}
-                    >
-                      <img src={img.url} alt={img.name} />
-                    </div>
-                  ))}
-                </div>
-                <div className={classes.column}>
-                  {images
-                    ?.slice(numImagePerColM, numImagePerColM * 2)
                     .map((img) => (
                       <div
                         key={img._id}
