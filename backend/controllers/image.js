@@ -103,14 +103,14 @@ const deleteImage = async (req, res) => {
       .json({ message: "Access denied. Can't delete image." });
 
   //delete image from cloudinary
-  await cloudinary.v2.uploader.destroy(`${foldername}/${imageId}`);
+  await cloudinary.v2.uploader.destroy(`${foldername}/${image?.image_id}`);
 
   //delete from Image db
-  await Image.deleteOne({ image_id: imageId });
+  await Image.deleteOne({ _id: imageId });
 
   //remove image from user's image db
   const user = req.user;
-  user.images = user.images.filter((image) => image.image_id !== imageId);
+  user.images = user.images.filter((img) => img.image_id !== image?.image_id);
 
   user.save();
 
