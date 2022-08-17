@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   const submitPhotoHandler = () => {
-    user ? router.push("/profile/upload-image") : router.push("/signin");
+    user ? router.push("/profile") : router.push("/signin");
   };
 
   const submitPhotoHandlerMobile = () => {
