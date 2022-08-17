@@ -18,8 +18,8 @@ const Profile = () => {
 
   const images = user?.images;
 
-  const imageHandler = (imageId, image_id) => {
-    router.push(`/images/${imageId}?image_id=${image_id}`);
+  const imageHandler = (imageId) => {
+    router.push(`/images/${imageId}`);
   };
 
   return (
@@ -96,7 +96,7 @@ const Profile = () => {
                   <div
                     key={img._id || ind}
                     className="image-container"
-                    onClick={() => imageHandler(img._id, img.image_id)}
+                    onClick={() => imageHandler(img._id)}
                   >
                     <img src={img.url} alt="" />
                   </div>

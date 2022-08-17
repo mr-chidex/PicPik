@@ -93,7 +93,7 @@ const deleteImage = async (req, res) => {
 
   //check if image exist and if user macthes the image author
   const image = await Image.findOne({
-    image_id: imageId,
+    _id: imageId,
     author: req.user._id,
   });
 
