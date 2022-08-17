@@ -5,15 +5,13 @@ import classes from "../styles/Home.module.css";
 import Head from "next/head";
 import dexSplash from "../dexSplash";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const { data } = await dexSplash.get("/images");
-
   return {
     props: {
       images: data?.images || [],
       total: data?.total || 1,
     },
-    revalidate: 60,
   };
 };
 

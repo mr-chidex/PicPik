@@ -2,25 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Head from "next/head";
 
-import { getImageActions } from "../../redux/actions/imageActions";
 import { deleteImageHandler } from "../../redux/actions/profileActions";
 import Alerts from "../../components/Alerts";
 import dexSplash from "../../dexSplash";
 
-export const getStaticPaths = async () => {
-  const { data } = await dexSplash.get("/images");
-
-  const images = data?.images;
-
-  const paths = images?.map((image) => ({ params: { id: image._id } }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const imageId = context.params.id;
 
   const { data } = await dexSplash.get(`/images/${imageId}`);
@@ -29,7 +15,6 @@ export const getStaticProps = async (context) => {
     props: {
       image: data,
     },
-    revalidate: 60,
   };
 };
 
