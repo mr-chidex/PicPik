@@ -35,7 +35,12 @@ const Login = () => {
     <>
       <Head>
         <title>PicPick | Sign in</title>
-      </Head>{" "}
+        <meta
+          name="description"
+          content="sign in to your dashboard to  upload and get quality images for your use"
+        />
+        <meta name="keywords" content="image, download, upload" />
+      </Head>
       <Head>
         <title>PicPick | Sign in</title>
       </Head>

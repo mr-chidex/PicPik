@@ -40,6 +40,8 @@ const Image = ({ image }) => {
     <>
       <Head>
         <title>PicPik | Image</title>
+        <meta name="description" content="view and download images" />
+        <meta name="keywords" content="image, download, upload" />
       </Head>
 
       <main className="container Image row mx-auto my-3">

@@ -39,6 +39,11 @@ const Signup = () => {
     <>
       <Head>
         <title>PicPick | Sign up</title>
+        <meta
+          name="description"
+          content="sign up to Pickpic to  upload and get quality images for your use"
+        />
+        <meta name="keywords" content="image, download, upload" />
       </Head>
       <main className="container">
         <div className="jumbotron">

@@ -26,6 +26,8 @@ const Profile = () => {
     <>
       <Head>
         <title>PicPik | Profile</title>
+        <meta name="description" content="profile content" />
+        <meta name="keywords" content="profile, image, upload" />
       </Head>
 
       <main className="container ">

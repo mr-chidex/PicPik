@@ -34,6 +34,8 @@ const Home = ({ images, total }) => {
     <>
       <Head>
         <title>PicPik | A place for all</title>
+        <meta name="description" content="get quality images for your use" />
+        <meta name="keywords" content="image, download" />
       </Head>
 
       <main className={classes.Home}>
