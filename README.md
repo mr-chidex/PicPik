@@ -14,6 +14,7 @@ MERN APP - Idea from unsplash
 - Json Web Token
 - Postman
 - React JS
+- Next JS
 - Bootstrap
 - Redux
 
@@ -22,6 +23,9 @@ MERN APP - Idea from unsplash
 - Image uploads
 - User signup and signin
 - Authorization and Authentication etc.
+
+## OTHERS
+converted app from React to Next
 
 ## Running this project locally
     
