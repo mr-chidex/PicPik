@@ -26,7 +26,7 @@ export default function Document() {
         <meta name="keywords" content="photo, gallery" />
         <meta property="og:description" content="Photo gallery web application" />
         <meta property="og:title" content="Photo gallery" />
-        <meta property="og:image" content="https://picpik.vercel.app/dexHome.jpg" />
+        <meta property="og:image" content="https://picpik.vercel.app/assets/images/5.png" />
         <meta property="og:site_name" content="Picpik" />
      
       </Head>
