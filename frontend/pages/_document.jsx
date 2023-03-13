@@ -22,6 +22,13 @@ export default function Document() {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <meta name="description" content="Photo gallery web application" />
+        <meta name="keywords" content="photo, gallery" />
+        <meta property="og:description" content="Photo gallery web application" />
+        <meta property="og:title" content="Photo gallery" />
+        <meta property="og:image" content="https://picpik.vercel.app/assets/images/dexHome.jpg" />
+        <meta property="og:site_name" content="Picpik" />
+     
       </Head>
       <body>
         <Main />
