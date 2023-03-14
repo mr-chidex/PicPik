@@ -6,7 +6,7 @@ const Footer = () => {
       height: "10rem",
       display: "grid",
       placeItems: "center",
-      backgroound: "#ccc",
+      background: "#ccc",
       marginTop: "2rem"
     }}
       className="footer border-top">
