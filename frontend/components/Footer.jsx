@@ -2,7 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="footer border-top">
+    <footer style={{
+      height: "10rem",
+      display: "grid",
+      placeItems: "center"
+    }}
+      className="footer border-top">
       <p className="text-center  mt-2">
         <small> Designed by&nbsp;</small>
         <a
