@@ -5,7 +5,9 @@ const Footer = () => {
     <footer style={{
       height: "10rem",
       display: "grid",
-      placeItems: "center"
+      placeItems: "center",
+      backgroound: "#ccc",
+      marginTop: "2rem"
     }}
       className="footer border-top">
       <p className="text-center  mt-2">
