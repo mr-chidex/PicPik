@@ -12,7 +12,7 @@ const addImage = async (req, res) => {
 
   //check image size
   if (req.file.size > 500000)
-    return res.status(400).json({ message: "image too large. min 500kb" });
+    return res.status(400).json({ message: "image too large. max 500kb" });
 
   const imageCloud = await cloudinary.v2.uploader.upload(req.file.path, {
     folder: foldername,

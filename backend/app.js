@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 //@handle errors
-app.use((error, _, res) => {
+app.use((error, _, res, __) => {
   const statusCode = error.statusCode || 500;
   res.status(statusCode).json({ message: error.message || "Network Error" });
 });
@@ -74,5 +74,6 @@ mongoose
     }
   })
   .catch((err) => {
-    throw new Error("Error connecting...");
+    console.error("Application startup failed:", err.message);
+    process.exitCode = 1;
   });

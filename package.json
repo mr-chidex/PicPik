@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "start": "node backend/app.js",
-    "dev": "nodemon backend/app.js"
+    "dev": "nodemon backend/app.js",
+    "frontend": "yarn --cwd frontend dev"
   },
   "repository": {
     "type": "git",
