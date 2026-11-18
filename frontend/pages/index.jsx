@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 
 import classes from "../styles/Home.module.css";
 import Head from "next/head";
-import dexSplash from "../dexSplash";
+import dexSplash, { getServerApiBaseUrl } from "../dexSplash";
 
-export const getServerSideProps = async () => {
-  const { data } = await dexSplash.get("/images");
+export const getServerSideProps = async (context) => {
+  const { data } = await dexSplash.get("/images", {
+    baseURL: getServerApiBaseUrl(context.req),
+  });
   return {
     props: {
       images: data?.images || [],

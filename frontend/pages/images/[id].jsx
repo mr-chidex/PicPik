@@ -4,12 +4,14 @@ import Head from "next/head";
 
 import { deleteImageHandler } from "../../redux/actions/profileActions";
 import Alerts from "../../components/Alerts";
-import dexSplash from "../../dexSplash";
+import dexSplash, { getServerApiBaseUrl } from "../../dexSplash";
 
 export const getServerSideProps = async (context) => {
   const imageId = context.params.id;
 
-  const { data } = await dexSplash.get(`/images/${imageId}`);
+  const { data } = await dexSplash.get(`/images/${imageId}`, {
+    baseURL: getServerApiBaseUrl(context.req),
+  });
 
   return {
     props: {

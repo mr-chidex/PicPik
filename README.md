@@ -29,35 +29,24 @@ MERN APP - Idea from unsplash
 
 converted app from React to Next
 
-## Running locally
+## Running and deploying
+
+The Next.js app in `frontend/` serves both the website and its API. MongoDB and Cloudinary credentials are read only by server-side API routes.
 
 Prerequisites: Node.js, Yarn, MongoDB (local or Atlas), and a Cloudinary account for image uploads.
 
-1. Install the backend dependencies from the repository root:
-
-   ```sh
-   yarn install
-   ```
-
-2. Copy `.env.example` to `.env` in the repository root. Set `DEX_PHOTOS` to your MongoDB connection string and `SECRET_KEY` to a private random value. Set the Cloudinary credentials to enable uploads. The first run creates the configured admin account and a test account if the database is empty.
-
-3. Start the backend from the repository root:
-
-   ```sh
-   yarn dev
-   ```
-
-   The API listens on `http://localhost:5000`.
-
-4. In a second terminal, install and start the frontend:
+1. Install the application dependencies:
 
    ```sh
    cd frontend
    yarn install
-   yarn dev
    ```
 
-   Open `http://localhost:3000`. The frontend uses `http://localhost:5000/api/v1` by default; set `NEXT_PUBLIC_BASE_URL` before starting/building it to use another API URL.
+2. Copy `frontend/.env.example` to `frontend/.env.local` and set your MongoDB URI, a private `SECRET_KEY`, and Cloudinary credentials. Set the admin seed values if you want an initial admin account. Never prefix these secrets with `NEXT_PUBLIC_`.
+
+3. Run the entire application from `frontend/` with `yarn dev`, or from the repository root with `yarn dev`. Open `http://localhost:3000`.
+
+4. For deployment, select `frontend/` as the project root and configure the same environment variables in the hosting provider. Build with `yarn build` and serve with `yarn start`.
 
 ## Clone this project
 
