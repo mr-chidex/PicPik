@@ -83,7 +83,9 @@ const Home = ({ images, total, loadError }) => {
               </button>
             </section>
           ) : images.length === 0 ? (
-            <p className={classes.emptyState}>No photos have been shared yet.</p>
+            <p className={classes.emptyState}>
+              No photos have been shared yet.
+            </p>
           ) : (
             <div className="container">
               <div className={[classes.images, classes.desktop].join(" ")}>

@@ -26,6 +26,17 @@ export function parseImage(req, res) {
 
 export function handleApiError(res, error) {
   const statusCode = error.statusCode || 500;
+  if (statusCode >= 500) {
+    const message = String(error.message || "Unknown server error").replace(
+      /mongodb(?:\+srv)?:\/\/[^\s]+/gi,
+      "[MongoDB URI redacted]",
+    );
+    console.error("API server error", {
+      name: error.name || "Error",
+      code: error.code || null,
+      message,
+    });
+  }
   const message = statusCode >= 500 ? "Network Error" : error.message;
   return res.status(statusCode).json({ message });
 }
