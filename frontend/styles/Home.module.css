@@ -38,6 +38,37 @@
   width: 100%;
 }
 
+.loadError,
+.emptyState {
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.loadError {
+  border: 1px solid #d5a3a3;
+  background: #fff5f5;
+  color: #522b2b;
+}
+
+.loadError h2 {
+  font-size: 1.25rem;
+}
+
+.loadError button {
+  border: 0;
+  border-radius: 4px;
+  background: #285d48;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+}
+
+.emptyState {
+  color: #444;
+}
+
 .hero {
   background-position: center;
   background-repeat: no-repeat;

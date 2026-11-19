@@ -6,18 +6,30 @@ import Head from "next/head";
 import dexSplash, { getServerApiBaseUrl } from "../dexSplash";
 
 export const getServerSideProps = async (context) => {
-  const { data } = await dexSplash.get("/images", {
-    baseURL: getServerApiBaseUrl(context.req),
-  });
-  return {
-    props: {
-      images: data?.images || [],
-      total: data?.total || 1,
-    },
-  };
+  try {
+    const { data } = await dexSplash.get("/images", {
+      baseURL: getServerApiBaseUrl(context.req),
+    });
+
+    return {
+      props: {
+        images: data?.images || [],
+        total: data?.total || 0,
+        loadError: false,
+      },
+    };
+  } catch {
+    return {
+      props: {
+        images: [],
+        total: 0,
+        loadError: true,
+      },
+    };
+  }
 };
 
-const Home = ({ images, total }) => {
+const Home = ({ images, total, loadError }) => {
   const router = useRouter();
 
   const numImagePerColD = Math.ceil(total / 4);
@@ -62,7 +74,17 @@ const Home = ({ images, total }) => {
         </div>
 
         <div>
-          {images && (
+          {loadError ? (
+            <section className={classes.loadError} role="alert">
+              <h2>Photos are temporarily unavailable</h2>
+              <p>We couldn&apos;t load the gallery. Please try again.</p>
+              <button type="button" onClick={() => router.reload()}>
+                Try again
+              </button>
+            </section>
+          ) : images.length === 0 ? (
+            <p className={classes.emptyState}>No photos have been shared yet.</p>
+          ) : (
             <div className="container">
               <div className={[classes.images, classes.desktop].join(" ")}>
                 <div className={classes.column}>
