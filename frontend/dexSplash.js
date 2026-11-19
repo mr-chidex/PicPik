@@ -1,7 +1,12 @@
 import axios from "axios";
 
 const dexSplash = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: "/api/v1",
 });
+
+export const getServerApiBaseUrl = (req) => {
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  return `${protocol}://${req.headers.host}/api/v1`;
+};
 
 export default dexSplash;

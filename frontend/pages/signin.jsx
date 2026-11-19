@@ -15,7 +15,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const { loading, user, message, error } = useSelector(
-    (state) => state.userLogin
+    (state) => state.userLogin,
   );
 
   useEffect(() => {
@@ -52,17 +52,19 @@ const Login = () => {
           {alerts && error && (
             <Alerts message={message} type={error ? "danger" : "success"} />
           )}
-          <div
-            className="alert alert-info"
-            style={{ textAlign: "center" }}
-            role="alert"
-          >
-            <p>Don't need to signup to access dashboard.</p>
-            <p>
-              email : testuser@email.com &amp; password:
-              <b> 11111</b>
-            </p>
-          </div>
+          {process.env.NODE_ENV !== "production" && (
+            <div
+              className="alert alert-info"
+              style={{ textAlign: "center" }}
+              role="alert"
+            >
+              <p>Development test account</p>
+              <p>
+                email : testuser@email.com &amp; password:
+                <b> 11111</b>
+              </p>
+            </div>
+          )}
           <form onSubmit={signinHandler}>
             <div className="form-group">
               <label htmlFor="email">Email Address:</label>

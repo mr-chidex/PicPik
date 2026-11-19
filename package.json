@@ -1,13 +1,13 @@
 {
-  "name": "chi_splash_backend",
+  "name": "picpik",
+  "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "mocha",
-    "start": "node backend/app.js",
-    "dev": "nodemon backend/app.js",
-    "frontend": "yarn --cwd frontend dev"
+    "dev": "yarn --cwd frontend dev",
+    "build": "yarn --cwd frontend build",
+    "start": "yarn --cwd frontend start",
+    "lint": "yarn --cwd frontend lint"
   },
   "repository": {
     "type": "git",
@@ -23,22 +23,6 @@
     "url": "https://github.com/mr-chidex/chi_splash_backend/issues"
   },
   "homepage": "https://github.com/mr-chidex/chi_splash_backend#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.25.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-promise-router": "^4.0.1",
-    "express-validator": "^6.10.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.18",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "nodemon": "^2.0.7"
-  },
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^8.3.2"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
